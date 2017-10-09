@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: fx1212
+    url: jdbc:mysql://127.0.0.1/pocket?characterEncoding=utf-8&useSSL=false
+  jpa:
+    show-sql: true
+    properties:
+        hibernate:
+            format_sql: true
+#  jackson:
+#    default-property-inclusion: non_null
+#server:
+#  context-path: /pocket
+
+# 日志文件的配置
+#logging:
+#    pattern:
+#        console: "%d - %msg%n"
+#    path: "/var/log/tomcat"
+#    file: "/var/log/tomcat/sell.log"
+#    level:
+#        cn.bravedawn.LoggerTest: debug
+#    #level: debug
