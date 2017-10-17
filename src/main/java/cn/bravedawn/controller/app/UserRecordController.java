@@ -24,7 +24,7 @@ public class UserRecordController {
 
     @GetMapping("/{id:\\d+}")
     @ApiOperation("用户记录查询服务")
-    public JsonBean query(@PathVariable(name = "id", required = true)Integer userId,
+    public JsonBean query(@PathVariable( name = "id", required = true)Integer userId,
                           @PageableDefault(page = 0, size = 10, sort = "updateDate",
                                   direction = Sort.Direction.DESC)Pageable pageable){
 
