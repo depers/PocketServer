@@ -1,7 +1,7 @@
 package cn.bravedawn.service;
 
 
-import cn.bravedawn.jo.JsonBean;
+import cn.bravedawn.common.JsonBean;
 import org.springframework.data.domain.Pageable;
 
 /**

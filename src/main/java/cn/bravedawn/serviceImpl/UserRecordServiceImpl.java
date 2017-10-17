@@ -1,7 +1,7 @@
 package cn.bravedawn.serviceImpl;
 
 import cn.bravedawn.bean.UserRecord;
-import cn.bravedawn.jo.JsonBean;
+import cn.bravedawn.common.JsonBean;
 import cn.bravedawn.repository.UserRecordRepository;
 import cn.bravedawn.service.UserRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.*;
 import javax.transaction.Transactional;
-import java.util.List;
 
 /**
  * Created by 冯晓 on 2017/10/9.
@@ -30,7 +29,7 @@ public class UserRecordServiceImpl implements UserRecordService{
     }
 
     public JsonBean queryAllByPage(Integer userId, Pageable pageable){
-        JsonBean jsonBean = new JsonBean();
+        //JsonBean jsonBean = new JsonBean();
         Specification<UserRecord> specification = new Specification<UserRecord>() {
             @Override
             public Predicate toPredicate(Root<UserRecord> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
@@ -40,12 +39,12 @@ public class UserRecordServiceImpl implements UserRecordService{
         };
         Page<UserRecord> userRecordPage = userRecordRepository.findAll(specification, pageable);
 
-        jsonBean.setTotal(userRecordPage.getNumberOfElements());
-        jsonBean.setPage_size(userRecordPage.getNumber());
-        jsonBean.setCode(0);
-        jsonBean.setMessage("success");
-        jsonBean.setData(userRecordPage.getContent());
+//        jsonBean.setTotal(userRecordPage.getNumberOfElements());
+//        jsonBean.setPage_size(userRecordPage.getNumber());
+//        jsonBean.setCode(0);
+//        jsonBean.setMessage("success");
+//        jsonBean.setData(userRecordPage.getContent());
 
-        return jsonBean;
+        return null;
     }
 }

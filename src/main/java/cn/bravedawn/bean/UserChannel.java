@@ -22,9 +22,9 @@ public class UserChannel {
 
     private String channel;
 
-    private String desc;
+    private String descText;
 
-    private String colorAvatar;
+    private String imageUrl;
 
     private Date updateDate;
 }

@@ -45,5 +45,6 @@ public interface UserRecordRepository extends
     @Query("update UserRecord o set o.userId = :userId where o.id = :id")
     public void update(@Param("id")Integer id, @Param("userId") Integer userId);
 
+    List<UserRecord> findByIdIn(List<Integer> ids);
 
 }

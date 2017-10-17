@@ -4,9 +4,13 @@ import cn.bravedawn.bean.UserChannel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
+import java.util.List;
+
 /**
  * Created by 冯晓 on 2017/10/9.
  */
 public interface UserChannelRepository extends JpaRepository<UserChannel,
         Integer>, JpaSpecificationExecutor<UserChannel> {
+
+    List<UserChannel> findAllByUserId(Integer userId);
 }

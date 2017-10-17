@@ -22,9 +22,11 @@ public class ComUser {
 
     private String pwd;
 
+    private String gender;
+
     private String avatar;
 
-    private String nickname;
+    private String name;
 
     private Date updateDate;
 

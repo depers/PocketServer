@@ -9,4 +9,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
  */
 public interface ComUserRepository extends JpaRepository<ComUser, Integer>,
         JpaSpecificationExecutor<ComUser>{
+
+    ComUser findComUserByPhone(String phone);
 }
