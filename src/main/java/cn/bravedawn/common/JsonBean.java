@@ -23,7 +23,7 @@ public class JsonBean<T> {
     private Integer page;
 
     @ApiModelProperty(value = "数据分页数量")
-    private Integer pre_page;
+    private Integer page_size;
 
     @ApiModelProperty(value = "返回数据")
     private T data;
@@ -42,7 +42,7 @@ public class JsonBean<T> {
         this.msg = msg;
         this.total = total;
         this.page = page;
-        this.pre_page = pre_page;
+        this.page_size = pre_page;
         this.data = data;
         this.title = title;
         this.desc = desc;

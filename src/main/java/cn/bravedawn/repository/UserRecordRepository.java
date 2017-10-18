@@ -1,6 +1,8 @@
 package cn.bravedawn.repository;
 
+import cn.bravedawn.bean.UserChannel;
 import cn.bravedawn.bean.UserRecord;
+import org.apache.catalina.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
@@ -46,5 +48,8 @@ public interface UserRecordRepository extends
     public void update(@Param("id")Integer id, @Param("userId") Integer userId);
 
     List<UserRecord> findByIdIn(List<Integer> ids);
+
+    List<UserRecord> findAllByUserIdAndStar(Integer userId, String star);
+
 
 }

@@ -17,8 +17,6 @@ public class RecordChannel {
     @GeneratedValue
     private Integer id;
 
-    private Integer userId;
-
     private Integer recordId;
 
     private Integer channelId;

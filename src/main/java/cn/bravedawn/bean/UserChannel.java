@@ -1,10 +1,12 @@
 package cn.bravedawn.bean;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 import java.util.Date;
 
 /**
@@ -27,4 +29,7 @@ public class UserChannel {
     private String imageUrl;
 
     private Date updateDate;
+
+    @Transient
+    private boolean isSelect;
 }

@@ -13,4 +13,6 @@ public interface RecordChannelRepository extends JpaRepository<RecordChannel, In
         JpaSpecificationExecutor<RecordChannel>{
 
     List<RecordChannel> findAllByChannelId(Integer channelId);
+
+    RecordChannel findByRecordId(Integer recordId);
 }
