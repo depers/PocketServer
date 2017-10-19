@@ -18,8 +18,8 @@ public class RecordChannelController {
     private RecordChannelService recordChannelService;
 
 
-    @GetMapping()
-    @ApiOperation("/{id:\\d+}")
+    @GetMapping("/{id:\\d+}")
+    @ApiOperation("获取用户修改栏目信息")
     public JsonBean get(@PathVariable(name = "id", required = true)Integer recordId){
         return recordChannelService.getChannel(recordId);
     }

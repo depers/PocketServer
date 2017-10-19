@@ -34,10 +34,8 @@ public class RecordChannelServiceImpl implements RecordChannelService{
     public JsonBean getChannel(Integer recordId){
         RecordChannel recordChannel = recordChannelRepository.findByRecordId(recordId);
         if (recordChannel == null){
-            return JsonBeanBuilder.builder()
-                    .setCode(ResponseCode.ERROR.getCode())
-                    .setMsg("该记录分组记录不存在")
-                    .build();
+            recordChannel = new RecordChannel();
+            recordChannel.setChannelId(0);
         }
         UserRecord record = userRecordRepository.findOne(recordId);
         List<UserChannel> userChannelList = userChannelRepository.findAllByUserId(record.getUserId());
@@ -59,14 +57,15 @@ public class RecordChannelServiceImpl implements RecordChannelService{
 
     public JsonBean modify(Integer recordId, Integer channelId){
         UserRecord record = userRecordRepository.findOne(recordId);
-        return JsonBeanBuilder.builder()
-                .setCode(ResponseCode.ERROR.getCode())
-                .setMsg("该记录不存在")
-                .build();
-        RecordChannel recordChannel = new RecordChannel();
-        recordChannel.setChannelId(channelId);
-        recordChannel.setRecordId(recordId);
-        recordChannel.setChannelId(channelId);
+
+        RecordChannel recordChannel = recordChannelRepository.findByRecordId(recordId);
+        if (recordChannel != null){
+            recordChannel.setChannelId(channelId);
+        } else{
+            recordChannel = new RecordChannel();
+            recordChannel.setRecordId(recordId);
+            recordChannel.setChannelId(channelId);
+        }
         recordChannelRepository.save(recordChannel);
         return JsonBeanBuilder.builder()
                 .setCode(ResponseCode.SUCCESS.getCode())
