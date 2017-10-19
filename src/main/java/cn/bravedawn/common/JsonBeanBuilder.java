@@ -21,6 +21,9 @@ public class JsonBeanBuilder<T> implements Serializable{
     @ApiModelProperty(value = "数据总数量")
     private Integer total;
 
+    @ApiModelProperty(value = "分页总页数")
+    private Integer total_page;
+
     @ApiModelProperty(value = "数据分页页数")
     private Integer page;
 
@@ -57,6 +60,11 @@ public class JsonBeanBuilder<T> implements Serializable{
         return this;
     }
 
+    public final JsonBeanBuilder setTotalPage(Integer totalPage){
+        this.total_page = totalPage;
+        return this;
+    }
+
     public final JsonBeanBuilder setPage(Integer page){
         this.page = page;
         return this;
@@ -88,7 +96,7 @@ public class JsonBeanBuilder<T> implements Serializable{
     }
 
     public final JsonBean build(){
-        return new JsonBean(code, msg, total, page, pre_page, data, title, desc, imageUrl);
+        return new JsonBean(code, msg, total, page, pre_page, total_page, data, title, desc, imageUrl);
     }
 
     public static JsonBeanBuilder builder(){

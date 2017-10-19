@@ -2,10 +2,7 @@ package cn.bravedawn.bean;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -32,5 +29,8 @@ public class UserRecord {
     private String star;
 
     private Date updateDate;
+
+    @Transient
+    private boolean mStar;
 
 }

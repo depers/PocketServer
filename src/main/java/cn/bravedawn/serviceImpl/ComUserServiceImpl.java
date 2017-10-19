@@ -36,9 +36,11 @@ public class ComUserServiceImpl implements ComUserService {
         user.setPhone(phone);
         user.setPwd(password);
         user.setName("口袋用户");
+        user.setGender("a");
         user.setAvatar(defaultAvatar);
         user.setUpdateDate(new Date());
         comUserRepository.save(user);
+        user.setGender("保密");
         return JsonBeanBuilder.builder()
                 .setCode(ResponseCode.SUCCESS.getCode())
                 .setMsg(ResponseCode.SUCCESS.getDesc())

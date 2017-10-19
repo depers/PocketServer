@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.*;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -54,9 +55,17 @@ public class UserRecordServiceImpl implements UserRecordService{
 //        jsonBean.setCode(0);
 //        jsonBean.setMessage("success");
 //        jsonBean.setData(userRecordPage.getContent());
+        for (UserRecord userRecord : userRecordPage.getContent()){
+            if (userRecord.getStar().equals("a")){
+                userRecord.setMStar(false);
+            } else{
+                userRecord.setMStar(true);
+            }
+        }
         return JsonBeanBuilder.builder()
                 .setCode(ResponseCode.SUCCESS.getCode())
                 .setMsg(ResponseCode.SUCCESS.getDesc())
+                .setTotalPage(userRecordPage.getTotalPages())
                 .setTotal((int) userRecordPage.getTotalElements())
                 .setPage(userRecordPage.getNumber())
                 .setData(userRecordPage.getContent())
@@ -70,9 +79,17 @@ public class UserRecordServiceImpl implements UserRecordService{
         userRecord.setUpdateDate(new Date());
         userRecord.setStar("a");
         userRecordRepository.save(userRecord);
+        if (userRecord.getStar().equals("a")){
+            userRecord.setMStar(false);
+        } else{
+            userRecord.setMStar(true);
+        }
+        List<UserRecord> records = new ArrayList<>();
+        records.add(userRecord);
         return JsonBeanBuilder.builder()
                 .setCode(ResponseCode.SUCCESS.getCode())
                 .setMsg(ResponseCode.SUCCESS.getDesc())
+                .setData(records)
                 .build();
     }
 
