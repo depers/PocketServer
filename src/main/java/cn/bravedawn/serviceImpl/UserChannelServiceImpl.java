@@ -101,11 +101,31 @@ public class UserChannelServiceImpl implements UserChannelService {
                     .setMsg("该用户不存在")
                     .build();
         }
-        List<UserChannel> channelList = userChannelRepository.findAllByUserId(userId);
+        List<UserChannel> channelList = userChannelRepository.findAllByUserIdOrderByUpdateDateDesc(userId);
+        for (UserChannel channel : channelList){
+            Integer size = recordChannelRepository.findAllByChannelId(channel.getId()).size();
+            channel.setCount(size);
+        }
         return JsonBeanBuilder.builder()
                 .setCode(ResponseCode.SUCCESS.getCode())
                 .setMsg(ResponseCode.SUCCESS.getDesc())
+                .setTotal(channelList.size())
                 .setData(channelList)
+                .build();
+    }
+
+    public JsonBean getChannelsByChannelId(Integer channelId){
+        UserChannel channel = userChannelRepository.findOne(channelId);
+        if (channel == null){
+            return JsonBeanBuilder.builder()
+                    .setCode(ResponseCode.ILLEGAL_ARGUMENT.getCode())
+                    .setMsg("该栏目不存在")
+                    .build();
+        }
+        return JsonBeanBuilder.builder()
+                .setCode(ResponseCode.SUCCESS.getCode())
+                .setMsg(ResponseCode.SUCCESS.getDesc())
+                .setData(channel)
                 .build();
     }
 

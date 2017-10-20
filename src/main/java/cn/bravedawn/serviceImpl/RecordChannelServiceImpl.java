@@ -38,7 +38,7 @@ public class RecordChannelServiceImpl implements RecordChannelService{
             recordChannel.setChannelId(0);
         }
         UserRecord record = userRecordRepository.findOne(recordId);
-        List<UserChannel> userChannelList = userChannelRepository.findAllByUserId(record.getUserId());
+        List<UserChannel> userChannelList = userChannelRepository.findAllByUserIdOrderByUpdateDateDesc(record.getUserId());
         for (UserChannel userChannel :userChannelList){
             if (userChannel.getId() == recordChannel.getChannelId()){
                 userChannel.setSelect(true);

@@ -18,9 +18,9 @@ public class UserChannelController {
 
     @PostMapping()
     @ApiOperation("新增分类")
-    public JsonBean add(@RequestParam Integer id,
+    public JsonBean add(@RequestParam Integer userId,
                         @RequestParam String title, @RequestParam String desc){
-        return userChannelService.add(id, title, desc);
+        return userChannelService.add(userId, title, desc);
     }
 
     @PutMapping("/{id:\\d+}")
@@ -35,6 +35,13 @@ public class UserChannelController {
     public JsonBean getChannelByUserId(@PathVariable(name = "id", required = true) Integer id){
         return userChannelService.getChannelsByUserId(id);
     }
+
+    @GetMapping("/info/{id:\\d+}")
+    @ApiOperation("获取该专栏的信息")
+    public JsonBean getChannelByChannelId(@PathVariable(name = "id", required = true) Integer channelId){
+        return userChannelService.getChannelsByChannelId(channelId);
+    }
+
 
     @DeleteMapping("/{id:\\d+}")
     @ApiOperation("删除分类")

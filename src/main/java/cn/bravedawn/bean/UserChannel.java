@@ -32,4 +32,7 @@ public class UserChannel {
 
     @Transient
     private boolean isSelect;
+
+    @Transient
+    private Integer count;
 }

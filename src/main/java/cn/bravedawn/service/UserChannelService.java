@@ -16,4 +16,6 @@ public interface UserChannelService {
     JsonBean delete(Integer channelId);
 
     JsonBean getChannelDetail(Integer channelId);
+
+    JsonBean getChannelsByChannelId(Integer channelId);
 }
