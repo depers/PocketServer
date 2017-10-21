@@ -7,7 +7,7 @@ import cn.bravedawn.common.JsonBean;
  */
 public interface RecordChannelService {
 
-    JsonBean getChannel(Integer recordId);
-
     JsonBean modify(Integer recordId, Integer channelId);
+
+    JsonBean getCount(Integer channelId);
 }

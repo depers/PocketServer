@@ -33,4 +33,7 @@ public class UserRecord {
     @Transient
     private boolean mStar;
 
+    @Transient
+    private String channel;
+
 }

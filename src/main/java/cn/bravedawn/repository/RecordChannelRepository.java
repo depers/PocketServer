@@ -17,5 +17,4 @@ public interface RecordChannelRepository extends JpaRepository<RecordChannel, In
 
     RecordChannel findByRecordId(Integer recordId);
 
-    List<RecordChannel> findByChannelId(Integer channelId);
 }

@@ -17,18 +17,17 @@ public class RecordChannelController {
     @Autowired
     private RecordChannelService recordChannelService;
 
-
-    @GetMapping("/{id:\\d+}")
-    @ApiOperation("获取用户修改栏目信息")
-    public JsonBean get(@PathVariable(name = "id", required = true)Integer recordId){
-        return recordChannelService.getChannel(recordId);
-    }
-
     @PutMapping("/{id:\\d+}")
     @ApiOperation("修改用户记录栏目")
     public JsonBean modify(@PathVariable(name = "id", required = true)Integer recordId,
                            @RequestParam Integer channelId){
         return recordChannelService.modify(recordId, channelId);
+    }
+
+    @GetMapping("/count/{id:\\d+}")
+    @ApiOperation("获取专栏文章数目")
+    public JsonBean getCount(@PathVariable(name = "id", required = true)Integer channelId){
+        return recordChannelService.getCount(channelId);
     }
 
 

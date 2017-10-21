@@ -1,11 +1,13 @@
 package cn.bravedawn.serviceImpl;
 
+import cn.bravedawn.bean.RecordChannel;
 import cn.bravedawn.bean.UserRecord;
 import cn.bravedawn.common.JsonBean;
 import cn.bravedawn.common.JsonBeanBuilder;
 import cn.bravedawn.common.ResponseCode;
 import cn.bravedawn.common.UrlType;
 import cn.bravedawn.repository.RecordChannelRepository;
+import cn.bravedawn.repository.UserChannelRepository;
 import cn.bravedawn.repository.UserRecordRepository;
 import cn.bravedawn.service.UserChannelService;
 import cn.bravedawn.service.UserRecordService;
@@ -34,6 +36,9 @@ public class UserRecordServiceImpl implements UserRecordService{
     @Autowired
     private RecordChannelRepository recordChannelRepository;
 
+    @Autowired
+    private UserChannelRepository userChannelRepository;
+
     @Transactional
     public void update(Integer id, Integer userId){
         userRecordRepository.update(id, userId);
@@ -50,12 +55,13 @@ public class UserRecordServiceImpl implements UserRecordService{
         };
         Page<UserRecord> userRecordPage = userRecordRepository.findAll(specification, pageable);
 
-//        jsonBean.setTotal(userRecordPage.getNumberOfElements());
-//        jsonBean.setPage_size(userRecordPage.getNumber());
-//        jsonBean.setCode(0);
-//        jsonBean.setMessage("success");
-//        jsonBean.setData(userRecordPage.getContent());
         for (UserRecord userRecord : userRecordPage.getContent()){
+            RecordChannel recordChannel = recordChannelRepository.findByRecordId(userRecord.getId());
+            if (recordChannel != null){
+                userRecord.setChannel(userChannelRepository.findOne(recordChannel.getChannelId()).getChannel());
+            } else{
+                userRecord.setChannel("");
+            }
             if (userRecord.getStar().equals("a")){
                 userRecord.setMStar(false);
             } else{
@@ -145,6 +151,15 @@ public class UserRecordServiceImpl implements UserRecordService{
 
     public JsonBean getStar(Integer userId){
         List<UserRecord> userRecordList = userRecordRepository.findAllByUserIdAndStar(userId, "b");
+        for (UserRecord record : userRecordList){
+            RecordChannel recordChannel = recordChannelRepository.findByRecordId(record.getId());
+            if (recordChannel != null){
+                record.setChannel(userChannelRepository.findOne(recordChannel.getChannelId()).getChannel());
+            } else{
+                record.setChannel("");
+            }
+            record.setMStar(true);
+        }
         return JsonBeanBuilder.builder()
                 .setCode(ResponseCode.SUCCESS.getCode())
                 .setMsg(ResponseCode.SUCCESS.getDesc())

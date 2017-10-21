@@ -31,29 +31,6 @@ public class RecordChannelServiceImpl implements RecordChannelService{
     @Autowired
     private UserChannelRepository userChannelRepository;
 
-    public JsonBean getChannel(Integer recordId){
-        RecordChannel recordChannel = recordChannelRepository.findByRecordId(recordId);
-        if (recordChannel == null){
-            recordChannel = new RecordChannel();
-            recordChannel.setChannelId(0);
-        }
-        UserRecord record = userRecordRepository.findOne(recordId);
-        List<UserChannel> userChannelList = userChannelRepository.findAllByUserIdOrderByUpdateDateDesc(record.getUserId());
-        for (UserChannel userChannel :userChannelList){
-            if (userChannel.getId() == recordChannel.getChannelId()){
-                userChannel.setSelect(true);
-            } else{
-                userChannel.setSelect(false);
-            }
-        }
-
-        return JsonBeanBuilder.builder()
-                .setTotal(userChannelList.size())
-                .setCode(ResponseCode.SUCCESS.getCode())
-                .setMsg(ResponseCode.SUCCESS.getDesc())
-                .setData(userChannelList)
-                .build();
-    }
 
     public JsonBean modify(Integer recordId, Integer channelId){
         UserRecord record = userRecordRepository.findOne(recordId);
@@ -67,9 +44,20 @@ public class RecordChannelServiceImpl implements RecordChannelService{
             recordChannel.setChannelId(channelId);
         }
         recordChannelRepository.save(recordChannel);
+        UserChannel channel = userChannelRepository.findOne(recordChannel.getChannelId());
         return JsonBeanBuilder.builder()
                 .setCode(ResponseCode.SUCCESS.getCode())
                 .setMsg(ResponseCode.SUCCESS.getDesc())
+                .setData(channel.getChannel())
+                .build();
+    }
+
+    public JsonBean getCount(Integer channelId){
+        List<RecordChannel> channels = recordChannelRepository.findAllByChannelId(channelId);
+        return JsonBeanBuilder.builder()
+                .setCode(ResponseCode.SUCCESS.getCode())
+                .setMsg(ResponseCode.SUCCESS.getDesc())
+                .setData(channels.size())
                 .build();
     }
 }

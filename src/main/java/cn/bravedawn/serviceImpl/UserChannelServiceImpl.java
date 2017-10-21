@@ -157,8 +157,20 @@ public class UserChannelServiceImpl implements UserChannelService {
         for (RecordChannel recordChannel : recordChannels){
             ids.add(recordChannel.getRecordId());
         }
-
         List<UserRecord> records = userRecordRepository.findByIdIn(ids);
+        for (UserRecord userRecord : records){
+            RecordChannel recordChannel = recordChannelRepository.findByRecordId(userRecord.getId());
+            if (recordChannel != null){
+                userRecord.setChannel(userChannelRepository.findOne(recordChannel.getChannelId()).getChannel());
+            } else{
+                userRecord.setChannel("");
+            }
+            if (userRecord.getStar().equals("a")){
+                userRecord.setMStar(false);
+            } else{
+                userRecord.setMStar(true);
+            }
+        }
         return JsonBeanBuilder.builder()
                 .setCode(ResponseCode.SUCCESS.getCode())
                 .setMsg(ResponseCode.SUCCESS.getDesc())
