@@ -1,6 +1,7 @@
 package cn.bravedawn.repository;
 
 import cn.bravedawn.bean.UserChannel;
+import cn.bravedawn.bean.UserRecord;
 import cn.bravedawn.common.JsonBean;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;

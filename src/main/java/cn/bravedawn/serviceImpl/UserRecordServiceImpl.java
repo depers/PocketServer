@@ -188,4 +188,21 @@ public class UserRecordServiceImpl implements UserRecordService{
         }
 
     }
+
+    public JsonBean searchByKeyword(Integer userId, String keyword){
+        List<UserRecord> userRecordList = userRecordRepository.findByUserIdAndTitleLike(userId, "%"+keyword+"%");
+        if (userRecordList.size() == 0){
+            return JsonBeanBuilder.builder()
+                    .setCode(ResponseCode.ERROR.getCode())
+                    .setMsg("没有搜索到相关结果")
+                    .setTotal(0)
+                    .build();
+        }
+        return JsonBeanBuilder.builder()
+                .setCode(ResponseCode.SUCCESS.getCode())
+                .setMsg(ResponseCode.SUCCESS.getDesc())
+                .setData(userRecordList)
+                .setTotal(userRecordList.size())
+                .build();
+    }
 }

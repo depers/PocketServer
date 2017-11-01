@@ -51,5 +51,5 @@ public interface UserRecordRepository extends
 
     List<UserRecord> findAllByUserIdAndStar(Integer userId, String star);
 
-
+    List<UserRecord> findByUserIdAndTitleLike(Integer userId, String keyword);
 }

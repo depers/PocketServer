@@ -62,4 +62,11 @@ public class UserRecordController {
     public JsonBean getStar(@ApiParam("用户id") @PathVariable(name = "id", required = true)Integer userId){
         return userRecordService.getStar(userId);
     }
+
+    @GetMapping("/search/{id:\\d+}")
+    @ApiOperation("用户记录查询服务")
+    public JsonBean search(@ApiParam("用户id") @PathVariable(name = "id", required = true)Integer userId,
+                           @ApiParam("搜索关键字") String keyword){
+        return userRecordService.searchByKeyword(userId, keyword);
+    }
 }

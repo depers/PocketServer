@@ -23,4 +23,6 @@ public interface UserRecordService {
     JsonBean deleteStar(Integer recordId);
 
     JsonBean getStar(Integer userId);
+
+    JsonBean searchByKeyword(Integer userId, String keyword);
 }
