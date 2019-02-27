@@ -31,5 +31,5 @@ Mysql | 5.6 | https://www.mysql.com/
 Nginx | 1.10 | http://nginx.org/en/download.html
 
 ## 感谢
-[轻松愉快之玩转SpringData](https://www.imooc.com/learn/821)
+[轻松愉快之玩转SpringData](https://www.imooc.com/learn/821)   
 [Spring Boot打造企业级微信点餐系统](https://coding.imooc.com/class/chapter/117.html#Anchor)
