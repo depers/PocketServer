@@ -1,9 +1,6 @@
 # pocketServer
 > 该项是[pocket App](https://github.com/depers/Pocket)的服务端项目，使用Spring Boot开发，为移动端提供RESTful接口。
 
-## 接口文档
-详情请参见本项目[Wiki]()
-
 ## 技术选型
 技术|说明|官网
 --|--|--
